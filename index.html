@@ -107,35 +107,37 @@
 				  }
 				  for (i = 0; i < order.length; i++) {
 				  	var sec = data.val()[order[i]];
-				  	if (sec.type == 'banner'){
-				  		if($("#banner" ).length ==0){
-				  			$('#page-wrapper').append(" <section id='banner'> <div class='inner'><div class='logo'><span class='icon fa-diamond'></span></div><h2>"+sec.primarytext+"</h2><p>"+sec.secondarytext+"</p></div></section>");
-				  		}else{
-				  			$("#banner").html("<div class='inner'><div class='logo'><span class='icon fa-diamond'></span></div><h2>"+sec.primarytext+"</h2><p>"+sec.secondarytext+"</p></div>");
-				  		}
-				  	}else if(sec.type == 'info'){
-				  		if($("#" + order[i]).length ==0){
-					  		if (wrapperApplied == false){
-					  			$('#page-wrapper').append("<section id='wrapper'></div>");
-					  			wrapperApplied = true;
+				  	if ("show" in sec && sec.show == 1){
+					  	if (sec.type == 'banner'){
+					  		if($("#banner" ).length ==0){
+					  			$('#page-wrapper').append(" <section id='banner'> <div class='inner'><div class='logo'><span class='icon fa-diamond'></span></div><h2>"+sec.primarytext+"</h2><p>"+sec.secondarytext+"</p></div></section>");
+					  		}else{
+					  			$("#banner").html("<div class='inner'><div class='logo'><span class='icon fa-diamond'></span></div><h2>"+sec.primarytext+"</h2><p>"+sec.secondarytext+"</p></div>");
 					  		}
-					  		$("#wrapper").append("<section id='"+order[i]+"' class='wrapper spotlight style"+numInfo+"'><div class='inner'><a href='#"+order[i]+"' class='image'><img src='"+sec.image+"' alt='' /></a><div class='content'><h2 class='major'>"+sec.title+"</h2><p>"+sec.text+"</p><a href='"+sec.learnmorelink+"' class='special'>Learn more</a></div></div></section>");
-					  		if (numInfo%2==0){
-					  			$("#"+order[i]).addClass('alt');
+					  	}else if(sec.type == 'info'){
+					  		if($("#" + order[i]).length ==0){
+						  		if (wrapperApplied == false){
+						  			$('#page-wrapper').append("<section id='wrapper'></div>");
+						  			wrapperApplied = true;
+						  		}
+						  		$("#wrapper").append("<section id='"+order[i]+"' class='wrapper spotlight style"+numInfo+"'><div class='inner'><a href='#"+order[i]+"' class='image'><img src='"+sec.image+"' alt='' /></a><div class='content'><h2 class='major'>"+sec.title+"</h2><p>"+sec.text+"</p><a href='"+sec.learnmorelink+"' class='special'>Learn more</a></div></div></section>");
+						  		if (numInfo%2==0){
+						  			$("#"+order[i]).addClass('alt');
+						  		}
+						  		numInfo+=1;
+						  		if (numInfo==4){
+						  			numInfo = 1;
+						  		}
+						  	}else{
+						  		$("#"+order[i]).html("<div class='inner'><a href='#"+order[i]+"' class='image'><img src='"+sec.image+"' alt='' /></a><div class='content'><h2 class='major'>"+sec.title+"</h2><p>"+sec.text+"</p><a href='"+sec.learnmorelink+"' class='special'>Learn more</a></div></div>");
+						  	}
+					  	}else if(sec.type == 'footer'){
+					  		if($("#footer" ).length ==0){
+					  			$("#page-wrapper").append("<section id='footer'><div class='inner'><h2 class='major'>Get in touch</h2><p>"+sec.text+"</p><form method='post' action='#'><div class='field'><label for='name'>Name</label><input type='text' name='name' id='name' /></div><div class='field'><label for='email'>Email</label><input type='email' name='email' id='email' /></div><div class='field'><label for='message'>Message</label><textarea name='message' id='message' rows='4'></textarea></div><ul class='actions'><li><input type='submit' value='Send Message' /></li></ul></form><ul class='contact'><li class='fa-home'>"+sec.companyname+"<br />"+sec.address+"</li><li class='fa-phone'>"+sec.phonenumber+"</li><li class='fa-envelope'><a href='#'>"+sec.email+"</a></li><li class='fa-twitter'><a href='#'>"+sec.twitter+"</a></li><li class='fa-facebook'><a href='#'>"+sec.facebook+"</a></li><li class='fa-instagram'><a href='#'>"+sec.instagram+"</a></li></ul><ul class='copyright'><li>&copy; "+sec.companyname+" All rights reserved.</li></ul></div></section>");
+					  		}else{
+					  			$("#footer").html("<div class='inner'><h2 class='major'>Get in touch</h2><p>"+sec.text+"</p><form method='post' action='#'><div class='field'><label for='name'>Name</label><input type='text' name='name' id='name' /></div><div class='field'><label for='email'>Email</label><input type='email' name='email' id='email' /></div><div class='field'><label for='message'>Message</label><textarea name='message' id='message' rows='4'></textarea></div><ul class='actions'><li><input type='submit' value='Send Message' /></li></ul></form><ul class='contact'><li class='fa-home'>"+sec.companyname+"<br />"+sec.address+"</li><li class='fa-phone'>"+sec.phonenumber+"</li><li class='fa-envelope'><a href='#'>"+sec.email+"</a></li><li class='fa-twitter'><a href='#'>"+sec.twitter+"</a></li><li class='fa-facebook'><a href='#'>"+sec.facebook+"</a></li><li class='fa-instagram'><a href='#'>"+sec.instagram+"</a></li></ul><ul class='copyright'><li>&copy; "+sec.companyname+" All rights reserved.</li></ul></div>");
 					  		}
-					  		numInfo+=1;
-					  		if (numInfo==4){
-					  			numInfo = 1;
-					  		}
-					  	}else{
-					  		$("#"+order[i]).html("<div class='inner'><a href='#"+order[i]+"' class='image'><img src='"+sec.image+"' alt='' /></a><div class='content'><h2 class='major'>"+sec.title+"</h2><p>"+sec.text+"</p><a href='"+sec.learnmorelink+"' class='special'>Learn more</a></div></div>");
 					  	}
-				  	}else if(sec.type == 'footer'){
-				  		if($("#footer" ).length ==0){
-				  			$("#page-wrapper").append("<section id='footer'><div class='inner'><h2 class='major'>Get in touch</h2><p>"+sec.text+"</p><form method='post' action='#'><div class='field'><label for='name'>Name</label><input type='text' name='name' id='name' /></div><div class='field'><label for='email'>Email</label><input type='email' name='email' id='email' /></div><div class='field'><label for='message'>Message</label><textarea name='message' id='message' rows='4'></textarea></div><ul class='actions'><li><input type='submit' value='Send Message' /></li></ul></form><ul class='contact'><li class='fa-home'>"+sec.companyname+"<br />"+sec.address+"</li><li class='fa-phone'>"+sec.phonenumber+"</li><li class='fa-envelope'><a href='#'>"+sec.email+"</a></li><li class='fa-twitter'><a href='#'>"+sec.twitter+"</a></li><li class='fa-facebook'><a href='#'>"+sec.facebook+"</a></li><li class='fa-instagram'><a href='#'>"+sec.instagram+"</a></li></ul><ul class='copyright'><li>&copy; "+sec.companyname+" All rights reserved.</li></ul></div></section>");
-				  		}else{
-				  			$("#footer").html("<div class='inner'><h2 class='major'>Get in touch</h2><p>"+sec.text+"</p><form method='post' action='#'><div class='field'><label for='name'>Name</label><input type='text' name='name' id='name' /></div><div class='field'><label for='email'>Email</label><input type='email' name='email' id='email' /></div><div class='field'><label for='message'>Message</label><textarea name='message' id='message' rows='4'></textarea></div><ul class='actions'><li><input type='submit' value='Send Message' /></li></ul></form><ul class='contact'><li class='fa-home'>"+sec.companyname+"<br />"+sec.address+"</li><li class='fa-phone'>"+sec.phonenumber+"</li><li class='fa-envelope'><a href='#'>"+sec.email+"</a></li><li class='fa-twitter'><a href='#'>"+sec.twitter+"</a></li><li class='fa-facebook'><a href='#'>"+sec.facebook+"</a></li><li class='fa-instagram'><a href='#'>"+sec.instagram+"</a></li></ul><ul class='copyright'><li>&copy; "+sec.companyname+" All rights reserved.</li></ul></div>");
-				  		}
 				  	}
 				  }
 				});
